@@ -1,0 +1,38 @@
+# Logical Partitions
+/system             ext4      system                                	flags=backup=1;display=system;logical;
+/vendor             ext4      vendor                                	flags=backup=1;display=vendor;logical;
+/product            ext4      product                               	flags=backup=1;display=product;logical;
+/odm                ext4      odm                                   	flags=backup=1;display=odm;logical;
+
+# Virtual devices
+/system_image		emmc      /dev/block/mapper/system					flags=backup=0;flashimg=1;display="System Image";wipeingui
+/vendor_image		emmc      /dev/block/mapper/vendor					flags=backup=0;flashimg=1;display="Vendor Image";wipeingui
+/product_image		emmc      /dev/block/mapper/product					flags=backup=0;flashimg=1;display="Product Image";wipeingui
+/odm_image			emmc      /dev/block/mapper/odm						flags=backup=0;flashimg=1;display="Odm Image";wipeingui
+
+# mount point		fstype    device	device2							flags
+/boot               emmc      /dev/block/by-name/boot               	flags=backup=1;display=boot;flashimg=1
+/recovery           emmc      /dev/block/by-name/recovery           	flags=backup=1;display=recovery;flashimg=1
+/metadata           ext4      /dev/block/by-name/metadata           	flags=display=metadata
+/data               auto      /dev/block/by-name/userdata           	flags=display=data;
+/cache              ext4      /dev/block/by-name/cache	
+/sdcard             auto      /dev/block/mmcblk0p1                  	flags=usermrf;backup=1;fsflags="bind";display="Internal Storage"
+/efs                ext4      /dev/block/by-name/sec_efs            	flags=backup=1;display=efs
+/sec_efs            ext4      /dev/block/by-name/sec_efs            	flags=display=sec_efs
+/modem              emmc      /dev/block/by-name/radio              	flags=display=modem
+/misc               emmc      /dev/block/by-name/misc               	flags=display=misc
+/keydata            ext4      /dev/block/by-name/keydata            	flags=display=keydata
+/keyrefuge          f2fs      /dev/block/by-name/keyrefuge          	flags=display=keyrefuge
+/dtb				emmc      /dev/block/by-name/dtb					flags=display=dtb
+/dtbo               emmc      /dev/block/by-name/dtbo					flags=display=dtbo
+/prism              ext4      /dev/block/by-name/prism              	flags=display=prism
+/optics             ext4      /dev/block/by-name/optics             	flags=display=optics
+/vbmeta_system      emmc      /dev/block/by-name/vbmeta_system      	flags=display=vbmeta_system;
+/vbmeta				emmc      /dev/block/by-name/vbmeta					flags=display=vbmeta;
+/system_ext         ext4      system_ext                            	flags=logical;display=system_ext
+/vendor_dlkm        ext4      vendor_dlkm                           	flags=logical;display=vendor_dlkm
+/system_dlkm        ext4      system_dlkm                           	flags=logical;display=system_dlkm
+
+# Removable storage
+/external_sd		auto      /dev/block/mmcblk1p1	/dev/block/mmcblk1	flags=storage;wipeingui;removable;display="Micro SDcard"
+/usb-otg			auto      /dev/block/sda1	/dev/block/sda			flags=storage;wipeingui;removable;display="USB OTG"
